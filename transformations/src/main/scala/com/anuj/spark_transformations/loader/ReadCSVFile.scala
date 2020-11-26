@@ -1,30 +1,34 @@
 package com.anuj.spark_transformations.loader
 
-
 import com.anuj.spark_transformations.config.{ApplicationConfig, CommandLineOptions, SparkSessionConfig}
 import org.apache.spark.sql.{DataFrame, SparkSession}
 
-object ReadTestFile {
+object ReadCSVFile {
 
   def main(args1: Array[String]): Unit = {
 
     val args = Seq("-f" , "input-csv-file.csv",
-      "-p", "E:/tutorial/git/spark-transformations/transformations/src/main/resources")
-    val jobName = "ReadTestFile"
+      "-p", "E:/tutorial/git/spark-transformations/transformations/src/main/resources",
+      "-c", "application.conf")
 
-    val applicationConfig = new ApplicationConfig("/application.conf")
-    val sparkSessionConfig = SparkSessionConfig(jobName, applicationConfig)
-    implicit val sparkSession: SparkSession = sparkSessionConfig.get
+    val jobName = "ReadTestFile"
 
     val commandLineInput = new CommandLineOptions(args)
 
-    val obj = new ReadTestFile
+    println(commandLineInput.configFilePath)
+
+    val applicationConfig = new ApplicationConfig("/" + commandLineInput.configFilePath)
+    val sparkSessionConfig = SparkSessionConfig(jobName, applicationConfig)
+    implicit val sparkSession: SparkSession = sparkSessionConfig.get
+
+    val obj = new ReadTextFileToDataFrame
     obj.process(commandLineInput, applicationConfig)
 
   }
+
 }
 
-class ReadTestFile extends Serializable {
+class ReadCSVFile extends Serializable {
 
   def process(commandLineInput: CommandLineOptions,
               applicationConfig: ApplicationConfig)(implicit sparkSession:SparkSession): Unit = {

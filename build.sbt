@@ -34,6 +34,7 @@ lazy val aggregatedProjects: Seq[ProjectReference] = Seq(transformations)
 lazy val `transformations` = project
   .settings(libraryDependencies ++= Dependencies.SparkModule)
   .settings(libraryDependencies ++= Dependencies.logging)
+  .settings(excludeDependencies ++= Dependencies.excludedJackson)
   .settings(excludeDependencies ++= Dependencies.excluded)
   .settings(assemblySettings)
 

@@ -22,6 +22,10 @@ class SparkSessionConfig(jobName: String,appConfig: ApplicationConfig) {
     sparkSessionBuilder.config("spark.sql.autoBroadcastJoinThreshold",-1)
 
     sparkSessionBuilder.getOrCreate()
+    /*val spark = sparkSessionBuilder.getOrCreate()
+
+    spark.sparkContext.hadoopConfiguration.set("avro.mapred.ignore.inputs.without.extension","false")
+    spark*/
   }
 }
 
