@@ -1,0 +1,4 @@
+emp_id,first_name,last_name,superior_emp_id,emp_dept_id,salary
+1,adam,smith,3,101,1000
+2,william,jones,3,101,1000
+3,srk,khan,,101,5000
